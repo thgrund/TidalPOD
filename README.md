@@ -35,7 +35,7 @@ d9 $ s "pod" <| pod_tap_tempo "1*4"
 
 ## Hardware setup
 
-![reamp_setup](/Users/tgrund/Development/tidalcycles/TidalPOD/concept/reamp_setup.png)
+![reamp_setup](./concept/reamp_setup.png)
 
 Used hardware: 
 
