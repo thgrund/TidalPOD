@@ -1,0 +1,120 @@
+-- :cd /Users/tgrund/Documents/livecoding/tidal/ideas/pod/
+-- :load delay
+-- :load reverb
+-- :load amp
+
+do
+-- Reverb
+setF "spring" 0
+setF "hall" 1
+-- Compressor Ratio
+setF "ratoff" 0
+setF "rat4" 0.26
+setF "rat2" 0.43
+setF "rat3" 0.67
+setF "rat6" 0.79
+setF "ratinf" 0.94
+-- Effect select knob
+setF "bypass" 0
+setF "compressor" 1
+setF "tremolo" 2
+setF "chorus1" 3
+setF "chorus2" 4
+setF "flanger1" 5
+setF "flanger2" 6
+setF "rotary" 7
+setF "delay" 8
+setF "delcomp" 9
+setF "deltrem" 10
+setF "delchor1" 11
+setF "delchor2" 12
+setF "delfla1" 13
+setF "delfla2" 14
+setF "delswell" 15
+-- Amp model
+setF "tube" 0
+setF "clean" 1
+setF "crunch" 2
+setF "drive" 3
+setF "layer" 4
+setF "smalltweed" 5
+setF "tweedblues" 6
+setF "blackpanel" 7
+setF "modernclass" 8
+setF "britclass" 9
+setF "britblues" 10
+setF "britclassic" 11
+setF "brithighgain" 12
+setF "rectified" 13
+setF "modernhigain" 14
+setF "fuzz" 15
+setF "twang" 16
+setF "crunch2" 17
+setF "blues" 18
+setF "insane" 19
+setF "smalltweed2" 20
+setF "boutique" 21
+setF "blackpanel2" 22
+setF "britclass2" 23
+setF "britclass3" 24
+setF "californiacrunch1" 25
+setF "californiacrunch2" 26
+setF "boutique1" 27
+setF "rectified2" 28
+setF "modernhigain2" 29
+setF "boutique2" 30
+setF "jazzclean" 31
+
+let pod_midichan = midichan 1
+    range' x = ((range 0 127 x))
+    -- DELAY
+    pod_dly_switch x = ccn 28 # ccv (range' x) # pod_midichan
+    pod_dly_time x = ccn 30 # ccv (range' x) # pod_midichan
+    pod_dly_dp x = ccn 62 # ccv (range' x) # pod_midichan
+    pod_dly_repeats x = ccn 32 # ccv (range 0 100 x) # pod_midichan
+    pod_dlylvl x = ccn 34 # ccv (range 0 100 x) # pod_midichan
+    -- AMP MODEL
+    pod_amp_model x = ccn 12 # ccv (x |% 33) # pod_midichan
+    pod_drive x = ccn 13 # ccv  (range' x) # pod_midichan
+    pod_drive2 x = ccn 20 # ccv  (range' x) # pod_midichan
+    pod_dist_switch x = ccn 25 # ccv  (range' x) # pod_midichan
+    -- REVERB
+    pod_rev_switch x = ccn 36 # ccv (range' x) # pod_midichan
+    pod_rev_type x = ccn 37 # ccv (range' x) # pod_midichan
+    pod_rev_decay x = ccn 38 # ccv (range' x) # pod_midichan
+    pod_rev_tone x = ccn 39 # ccv (range' x) # pod_midichan
+    pod_rev_diffusion x = ccn 40 # ccv (range' x) # pod_midichan
+    pod_rev_density x = ccn 41 # ccv (range' x) # pod_midichan
+    pod_rev_level x = ccn 18 # ccv (range' x) # pod_midichan
+    -- WAH WAH
+    pod_wah_switch x = ccn 43 # ccv (range' x) # pod_midichan
+    pod_wah_pedal x = ccn 4 # ccv (range' x) # pod_midichan
+    pod_wah_low_freq x = ccn 44 # ccv (range' x) # pod_midichan
+    pod_wah_top_freq x = ccn 45 # ccv (range' x) # pod_midichan
+    -- VOLUME
+    pod_vol_pedal x = ccn 7 # ccv (range' x) # pod_midichan
+    pod_vol_pedal_min x = ccn 46 # ccv (range' x) # pod_midichan
+       --  0 = BEFORE TUBE ; 1 = AFTER TUBE
+    pod_vol_pedal_location x = ccn 47 # ccv (range' x) # pod_midichan
+    pod_vol_swell_switch x = ccn 48 # ccv (range' x) # pod_midichan
+    pod_vol_swell_time x = ccn 49 # ccv (range' x) # pod_midichan
+    -- Tempo
+    pod_tap_tempo x = ccn 64 <| ccv (range' x) #  pod_midichan
+    -- Compressor
+    pod_compressor_ratio x = ccn 42 <| ccv (range' x) #  pod_midichan
+    -- Chorus
+    --pod_chorus_ = ccn 72 <| ccv (range' x) #  pod_midichan
+    -- EQ
+    pod_eq_bass x = ccn 14 <| ccv (range' x) #  pod_midichan
+    pod_eq_mid x = ccn 15 <| ccv (range' x) #  pod_midichan
+    pod_eq_treble x = ccn 16 <| ccv (range' x) #  pod_midichan
+    pod_eq_brigth_switch x = ccn 73 <| ccv (range' x) #  pod_midichan
+    pod_eq_presence x = ccn 21 <| ccv (range' x) #  pod_midichan
+    pod_eq_presence_bump x = ccn 27 <| ccv (range' x) #  pod_midichan
+    -- Effect
+    pod_effect_tweak x = ccn 1 <| ccv (range' x) #  pod_midichan
+    pod_effect_select x = ccn 19 <| ccv (x |% 16) #  pod_midichan
+    -- Rotary
+    -- Tremolo
+    -- A.I.R
+    pod_air_lvl x = ccn 72 <| ccv (range' x) #  pod_midichan
